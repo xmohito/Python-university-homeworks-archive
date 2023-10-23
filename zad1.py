@@ -5,26 +5,27 @@
 # Teraz masz <wiek> lat, a za rok będzie to <wiek za rok>. Rok urodzenia to <rok urodzenia>
 import datetime
 
-name = input("Enter your name: ")
-age = input("Enter your age: ")
-def current_year():
+def get_current_year():
     now = datetime.datetime.now()
     return now.year
 
-year = current_year()
+def get_first_letter(name):
+    if name:
+        return name[0]
+    return None
 
-if not name or not age or not age.isdigit() or name.isdigit() or name.isspace() or int(age) > int(year):
-    print("Something gone wrong!")
+name = input("Enter your name: ")
+age = input("Enter your age: ")
+year = get_current_year()
+
+if not name or not age.isdigit() or not age.isnumeric() or name.isdigit() or name.isspace() or int(age) > year:
+    print("Something has gone wrong!")
 else:
-    def first_letter(name):
-        if len(name) > 0:
-            return name[0]
-        else:
-            return None
-    birth_date = current_year() - int(age)
+    age = int(age)
+    birth_date = year - age
+    next_year = age + 1
 
-    next_year = int(age) + 1
     print("Hi,", name)
-    print("Your name have", len(name), "letters, and begins with", first_letter(name))
+    print("Your name has", len(name), "letters, and begins with", get_first_letter(name))
     print("Now, you're", age, "and next year you will be", next_year)
     print("Your year of birth is", birth_date)
